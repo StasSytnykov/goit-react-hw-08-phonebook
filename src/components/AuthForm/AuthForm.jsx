@@ -56,7 +56,7 @@ export const AuthForm = ({ title }) => {
   };
 
   const handleSubmit = (name, email, password) => {
-    dispatch(register({ email, password, name }));
+    return dispatch(register({ name, email, password }));
   };
 
   return (
@@ -87,7 +87,7 @@ export const AuthForm = ({ title }) => {
           showPassword: false,
         }}
         onSubmit={values =>
-          handleSubmit(values.email, values.name, values.password)
+          handleSubmit(values.name, values.email, values.password)
         }
       >
         {({ errors, touched, values }) => {

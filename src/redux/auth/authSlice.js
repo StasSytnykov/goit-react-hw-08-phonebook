@@ -3,19 +3,19 @@ import { createSlice } from '@reduxjs/toolkit';
 import { register } from './authOperations';
 
 const initialState = {
-  contact: { name: null, email: null },
+  user: { name: null, email: null },
   token: null,
   isLoggedIn: false,
 };
 
-export const contactsSlice = createSlice({
+export const userSlice = createSlice({
   name: 'auth',
   initialState,
   extraReducers: {
     [register.fulfilled](state, action) {
       console.log(action);
-      state.contact = action.payload.contact;
-      // state.token = action.payload.token;
+      state.user = action.payload.user;
+      state.token = action.payload.token;
       state.isLoggedIn = true;
     },
   },
