@@ -1,6 +1,6 @@
 import { ContactListItem } from './ContactListItem';
 import { useFilter } from 'hooks/filterHook';
-import { useGetContactsQuery } from 'redux/contacts/contactsSlice';
+import { useGetContactsQuery } from 'redux/auth/authSlice';
 import { useMemo } from 'react';
 
 export const ContactsList = () => {

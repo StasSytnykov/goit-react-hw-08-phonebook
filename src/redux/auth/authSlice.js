@@ -1,4 +1,25 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createSlice } from '@reduxjs/toolkit';
+import { register } from './authOperations';
+
+const initialState = {
+  contact: { name: null, email: null },
+  token: null,
+  isLoggedIn: false,
+};
+
+export const contactsSlice = createSlice({
+  name: 'auth',
+  initialState,
+  extraReducers: {
+    [register.fulfilled](state, action) {
+      console.log(action);
+      state.contact = action.payload.contact;
+      // state.token = action.payload.token;
+      state.isLoggedIn = true;
+    },
+  },
+});
 
 export const contactsApi = createApi({
   reducerPath: 'contactsApi',

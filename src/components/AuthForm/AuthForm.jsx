@@ -1,11 +1,23 @@
 import { Formik, Form, Field } from 'formik';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Box, Typography } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Button from '@mui/material/Button';
-import style from './RegisterView.module.css';
+import { register } from 'redux/auth/authOperations';
+import style from './RegisterForm.module.css';
+
+const validateName = value => {
+  let error;
+  if (!value) {
+    error = 'Required';
+  } else if (/^[A-Za-z]+$/.test(value)) {
+    error = 'Invalid name';
+  }
+  return error;
+};
 
 const validateEmail = value => {
   let error;
@@ -28,16 +40,23 @@ const validatePassword = value => {
   return error;
 };
 
-export const UserFormRegister = ({ handleLogin, auth, title }) => {
+export const AuthForm = ({ title }) => {
+  const dispatch = useDispatch();
   const [value, setValue] = useState({
     showPassword: false,
   });
+  //   const [email, setEmail] = useState('');
+  //   const [pass, setPass] = useState('');
 
   const handleClickShowPassword = () => {
     setValue({
       ...value,
       showPassword: !value.showPassword,
     });
+  };
+
+  const handleSubmit = (name, email, password) => {
+    dispatch(register({ email, password, name }));
   };
 
   return (
@@ -64,15 +83,33 @@ export const UserFormRegister = ({ handleLogin, auth, title }) => {
         initialValues={{
           email: '',
           password: '',
+          name: '',
           showPassword: false,
         }}
-        onSubmit={values => handleLogin(values.email, values.password)}
+        onSubmit={values =>
+          handleSubmit(values.email, values.name, values.password)
+        }
       >
         {({ errors, touched, values }) => {
           const password = values.password.length >= 6;
 
           return (
             <Form>
+              <Box className={style.inputThumb}>
+                <Typography variant="caption" className={style.inputText}>
+                  Name
+                </Typography>
+                <Field
+                  className={style.input}
+                  name="name"
+                  validate={validateName}
+                />
+                {errors.name && touched.name && (
+                  <Typography variant="subtitle1" className={style.helpfulText}>
+                    {errors.name}
+                  </Typography>
+                )}
+              </Box>
               <Box className={style.inputThumb}>
                 <Typography variant="caption" className={style.inputText}>
                   Email
@@ -119,10 +156,7 @@ export const UserFormRegister = ({ handleLogin, auth, title }) => {
                 )}
               </Box>
 
-              <Button
-                type="submit"
-                disabled={!!errors.email || !password || auth}
-              >
+              <Button type="submit" disabled={!!errors.email || !password}>
                 Login
               </Button>
             </Form>
