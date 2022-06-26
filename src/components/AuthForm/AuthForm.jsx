@@ -6,7 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Button from '@mui/material/Button';
-import { register } from 'redux/auth/authOperations';
+import { register, login } from 'redux/auth/authOperations';
 import style from './RegisterForm.module.css';
 
 const validateName = value => {
@@ -56,7 +56,10 @@ export const AuthForm = ({ title }) => {
   };
 
   const handleSubmit = (name, email, password) => {
-    return dispatch(register({ name, email, password }));
+    title === 'Register'
+      ? dispatch(register({ name, email, password }))
+      : dispatch(login({ email, password }));
+    // dispatch(register({ name, email, password }));
   };
 
   return (
@@ -95,21 +98,26 @@ export const AuthForm = ({ title }) => {
 
           return (
             <Form>
-              <Box className={style.inputThumb}>
-                <Typography variant="caption" className={style.inputText}>
-                  Name
-                </Typography>
-                <Field
-                  className={style.input}
-                  name="name"
-                  validate={validateName}
-                />
-                {errors.name && touched.name && (
-                  <Typography variant="subtitle1" className={style.helpfulText}>
-                    {errors.name}
+              {title === 'Register' ? (
+                <Box className={style.inputThumb}>
+                  <Typography variant="caption" className={style.inputText}>
+                    Name
                   </Typography>
-                )}
-              </Box>
+                  <Field
+                    className={style.input}
+                    name="name"
+                    validate={validateName}
+                  />
+                  {errors.name && touched.name && (
+                    <Typography
+                      variant="subtitle1"
+                      className={style.helpfulText}
+                    >
+                      {errors.name}
+                    </Typography>
+                  )}
+                </Box>
+              ) : null}
               <Box className={style.inputThumb}>
                 <Typography variant="caption" className={style.inputText}>
                   Email

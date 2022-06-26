@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { createSlice } from '@reduxjs/toolkit';
-import { register } from './authOperations';
+import { register, login } from './authOperations';
 
 const initialState = {
   user: { name: null, email: null },
@@ -12,10 +12,16 @@ export const userSlice = createSlice({
   name: 'auth',
   initialState,
   extraReducers: {
-    [register.fulfilled](state, action) {
-      console.log(action);
-      state.user = action.payload.user;
-      state.token = action.payload.token;
+    [register.fulfilled](state, { payload }) {
+      console.log(payload);
+      state.user = payload.user;
+      state.token = payload.token;
+      state.isLoggedIn = true;
+    },
+    [login.fulfilled](state, { payload }) {
+      console.log(payload);
+      state.user = payload.user;
+      state.token = payload.token;
       state.isLoggedIn = true;
     },
   },
