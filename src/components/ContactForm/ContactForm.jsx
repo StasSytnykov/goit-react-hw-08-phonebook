@@ -32,8 +32,8 @@ export const ContactForm = () => {
   const onSubmitForm = event => {
     event.preventDefault();
     onAddContact({
-      name: name,
-      phone: number,
+      name,
+      number,
     });
 
     reset(event);

@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { ContactsView } from 'views/ContactsView';
-import { HomePageView } from 'views/HomePageView';
+import { HomePageView } from 'views/AppBar';
 import { RegisterView } from 'views/RegisterView';
 import { LoginForm } from 'views/LoginViews';
 
