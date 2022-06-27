@@ -2,7 +2,7 @@ import { useState } from 'react';
 import {
   useAddContactMutation,
   useGetContactsQuery,
-} from 'redux/auth/authSlice';
+} from 'redux/contacts/contactsSlice';
 import style from './ContactForm.module.css';
 
 export const ContactForm = () => {

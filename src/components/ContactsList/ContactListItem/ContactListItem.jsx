@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useDeleteContactMutation } from 'redux/auth/authSlice';
+import { useDeleteContactMutation } from 'redux/contacts/contactsSlice';
 import style from './ContactsListItem.module.css';
 
 export const ContactListItem = ({ name, number, id }) => {

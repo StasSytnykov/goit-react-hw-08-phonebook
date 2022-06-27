@@ -42,14 +42,9 @@ const validatePassword = value => {
 
 export const AuthForm = ({ title }) => {
   const dispatch = useDispatch();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [value, setValue] = useState({
     showPassword: false,
   });
-  //   const [email, setEmail] = useState('');
-  //   const [pass, setPass] = useState('');
 
   const handleClickShowPassword = () => {
     setValue({
@@ -62,7 +57,6 @@ export const AuthForm = ({ title }) => {
     title === 'Register'
       ? dispatch(register({ name, email, password }))
       : dispatch(login({ email, password }));
-    // dispatch(register({ name, email, password }));
   };
 
   return (
@@ -86,18 +80,16 @@ export const AuthForm = ({ title }) => {
         {title}
       </Typography>
       <Formik
-      // initialValues={{
-      //   email: '',
-      //   password: '',
-      //   name: '',
-      //   showPassword: false,
-      // }}
-      // onSubmit={values => {
-      //   handleSubmit(values.name, values.email, values.password);
-      //   values.email = '';
-      //   values.password = '';
-      //   console.log(values.email);
-      // }}
+        initialValues={{
+          email: '',
+          password: '',
+          name: '',
+          showPassword: false,
+        }}
+        onSubmit={(values, { resetForm }) => {
+          handleSubmit(values.name, values.email, values.password);
+          resetForm();
+        }}
       >
         {({ errors, touched, values }) => {
           const password = values.password.length >= 7;
@@ -112,6 +104,7 @@ export const AuthForm = ({ title }) => {
                   <Field
                     className={style.input}
                     name="name"
+                    type="text"
                     validate={validateName}
                   />
                   {errors.name && touched.name && (
@@ -132,7 +125,6 @@ export const AuthForm = ({ title }) => {
                   className={style.input}
                   name="email"
                   type="email"
-                  value={email}
                   validate={validateEmail}
                 />
                 {errors.email && touched.email && (
