@@ -34,7 +34,7 @@ const validatePassword = value => {
   if (!value) {
     error = 'Required';
   }
-  if (value.length !== 0 && value.length < 6) {
+  if (value.length < 7) {
     error = 'Password to short';
   }
   return error;
@@ -42,6 +42,9 @@ const validatePassword = value => {
 
 export const AuthForm = ({ title }) => {
   const dispatch = useDispatch();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [value, setValue] = useState({
     showPassword: false,
   });
@@ -83,18 +86,21 @@ export const AuthForm = ({ title }) => {
         {title}
       </Typography>
       <Formik
-        initialValues={{
-          email: '',
-          password: '',
-          name: '',
-          showPassword: false,
-        }}
-        onSubmit={values =>
-          handleSubmit(values.name, values.email, values.password)
-        }
+      // initialValues={{
+      //   email: '',
+      //   password: '',
+      //   name: '',
+      //   showPassword: false,
+      // }}
+      // onSubmit={values => {
+      //   handleSubmit(values.name, values.email, values.password);
+      //   values.email = '';
+      //   values.password = '';
+      //   console.log(values.email);
+      // }}
       >
         {({ errors, touched, values }) => {
-          const password = values.password.length >= 6;
+          const password = values.password.length >= 7;
 
           return (
             <Form>
@@ -125,6 +131,8 @@ export const AuthForm = ({ title }) => {
                 <Field
                   className={style.input}
                   name="email"
+                  type="email"
+                  value={email}
                   validate={validateEmail}
                 />
                 {errors.email && touched.email && (

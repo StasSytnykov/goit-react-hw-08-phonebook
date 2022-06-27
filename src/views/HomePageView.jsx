@@ -5,9 +5,16 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import { Link, Outlet } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getLoggedIn } from 'redux/auth/authSelectors';
+import { logout } from 'redux/auth/authOperations';
 // import MenuIcon from '@mui/icons-material/Menu';
 
 export const HomePageView = () => {
+  console.log(getLoggedIn);
+  const isLoggedIn = useSelector(getLoggedIn);
+  const dispatch = useDispatch();
+  console.log(isLoggedIn);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -20,14 +27,22 @@ export const HomePageView = () => {
             sx={{ mr: 2 }}
           ></IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
+            Contacts book
           </Typography>
-          <Button color="inherit">
-            <Link to="/register">Register</Link>
-          </Button>
-          <Button color="inherit">
-            <Link to="/login">Login</Link>
-          </Button>
+          {!isLoggedIn ? (
+            <>
+              <Button color="inherit">
+                <Link to="/register">Register</Link>
+              </Button>
+              <Button color="inherit">
+                <Link to="/login">Login</Link>
+              </Button>
+            </>
+          ) : (
+            <Button onClick={() => dispatch(logout())} color="inherit">
+              Logout
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
       <Outlet />
