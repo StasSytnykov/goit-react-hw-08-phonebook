@@ -1,24 +1,31 @@
+import { Box, TextField, Typography } from '@mui/material';
 import { useFilter } from 'hooks/filterHook';
-import style from './Filter.module.css';
 
 export const Filter = () => {
   const { filter, changeFilter } = useFilter();
 
   return (
-    <div>
-      <label>
-        <p>Find contacts by name</p>
-        <input
-          className={style.input}
-          value={filter}
-          type="text"
-          name="filter"
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          required
-          onChange={event => changeFilter(event.target.value)}
-        />
-      </label>
-    </div>
+    <Box
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      alignItems="center"
+      sx={{
+        '& > :not(style)': { m: 2 },
+      }}
+    >
+      <Typography variant="h2">Contacts</Typography>
+      <TextField
+        sx={{ width: '45ch' }}
+        type="text"
+        name="filter"
+        value={filter}
+        onChange={event => changeFilter(event.target.value)}
+        id="filled-basic"
+        label="Find contacts by name"
+        variant="filled"
+        required
+      />
+    </Box>
   );
 };

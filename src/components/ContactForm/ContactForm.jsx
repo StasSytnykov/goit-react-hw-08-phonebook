@@ -55,41 +55,44 @@ export const ContactForm = () => {
   };
 
   return (
-    <Box
-      component="form"
-      display="flex"
-      flexDirection="column"
-      justifyContent="center"
-      alignItems="center"
-      sx={{
-        '& > :not(style)': { m: 1 },
-      }}
-      autoComplete="off"
-      onSubmit={onSubmitForm}
-    >
+    <Box textAlign="center">
       <Typography variant="h1">Phonebook</Typography>
-      <TextField
-        sx={{ width: '45ch' }}
-        type="text"
-        name="name"
-        onChange={onChangeInput}
-        id="filled-basic"
-        label="Name"
-        variant="filled"
-      />
-      <TextField
-        sx={{ width: '45ch' }}
-        value={number}
-        type="tel"
-        name="number"
-        id="filled-basic"
-        label="Number"
-        variant="filled"
-        onChange={onChangeInput}
-      />
-      <Button disabled={!name || !number} type="submit">
-        Add Contact
-      </Button>
+      <Box
+        component="form"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        sx={{
+          '& > :not(style)': { m: 1 },
+        }}
+        autoComplete="off"
+        onSubmit={onSubmitForm}
+      >
+        <TextField
+          sx={{ width: '45ch' }}
+          type="text"
+          name="name"
+          onChange={onChangeInput}
+          id="filled-basic"
+          label="Name"
+          variant="filled"
+          required
+        />
+        <TextField
+          sx={{ width: '45ch' }}
+          value={number}
+          type="tel"
+          name="number"
+          id="filled-basic"
+          label="Number"
+          variant="filled"
+          onChange={onChangeInput}
+          required
+        />
+        <Button disabled={!name || !number} type="submit">
+          Add Contact
+        </Button>
+      </Box>
     </Box>
   );
 };

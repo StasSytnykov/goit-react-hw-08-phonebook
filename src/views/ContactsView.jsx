@@ -11,7 +11,6 @@ export const ContactsView = () => {
   return isLoggedIn ? (
     <>
       <ContactForm />
-      <h2>Contacts</h2>
       <Filter />
       <ContactsList />
     </>
