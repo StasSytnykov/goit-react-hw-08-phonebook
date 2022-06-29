@@ -2,9 +2,9 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { ContactsView } from 'views/ContactsView';
-import { HomePageView } from 'views/AppBar';
+import { AppBarView } from 'views/AppBarView';
 import { RegisterView } from 'views/RegisterView';
-import { LoginForm } from 'views/LoginViews';
+import { LoginView } from 'views/LoginView';
 import { fetchCurrentUser } from 'redux/auth/authOperations';
 
 export const App = () => {
@@ -16,11 +16,11 @@ export const App = () => {
 
   return (
     <Routes>
-      <Route path="*" element={<Navigate to="/" />} />
-      <Route path="/" element={<HomePageView />}>
-        <Route path="/register" element={<RegisterView />} />
-        <Route path="/login" element={<LoginForm />} />
+      <Route path="*" element={<Navigate to="/register" />} />
+      <Route path="/" element={<AppBarView />}>
         <Route path="/contacts" element={<ContactsView />} />
+        <Route path="/register" element={<RegisterView restricted />} />
+        <Route path="/login" element={<LoginView restricted />} />
       </Route>
     </Routes>
   );

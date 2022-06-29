@@ -10,11 +10,9 @@ import { getLoggedIn } from 'redux/auth/authSelectors';
 import { logout } from 'redux/auth/authOperations';
 // import MenuIcon from '@mui/icons-material/Menu';
 
-export const HomePageView = () => {
-  console.log(getLoggedIn);
+export const AppBarView = () => {
   const isLoggedIn = useSelector(getLoggedIn);
   const dispatch = useDispatch();
-  console.log(isLoggedIn);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -25,9 +23,7 @@ export const HomePageView = () => {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
-          >
-            <Link to="/contacts">Contacts List</Link>
-          </IconButton>
+          ></IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Contacts book
           </Typography>
