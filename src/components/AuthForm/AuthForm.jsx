@@ -61,7 +61,6 @@ export const AuthForm = ({ title }) => {
 
   return (
     <Box
-      // height="100vh"
       display="flex"
       flexDirection="column"
       justifyContent="center"
@@ -164,8 +163,13 @@ export const AuthForm = ({ title }) => {
                 )}
               </Box>
 
-              <Button type="submit" disabled={!!errors.email || !password}>
-                Login
+              <Button
+                fullWidth={true}
+                color="primary"
+                type="submit"
+                disabled={!!errors.email || !password}
+              >
+                {title === 'Register' ? 'Register' : 'Login'}
               </Button>
             </Form>
           );
