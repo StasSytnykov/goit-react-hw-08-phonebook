@@ -13,7 +13,7 @@ export const ContactListItem = ({ name, number, id }) => {
         className={style.button}
         disabled={isLoading}
         onClick={() => deleteContact(id)}
-        ype="button"
+        type="button"
       >
         Delete
       </button>

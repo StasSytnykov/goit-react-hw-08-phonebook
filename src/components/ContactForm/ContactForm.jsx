@@ -1,9 +1,13 @@
 import { useState } from 'react';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import { Typography } from '@mui/material';
+
 import {
   useAddContactMutation,
   useGetContactsQuery,
 } from 'redux/contacts/contactsSlice';
-import style from './ContactForm.module.css';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
@@ -31,10 +35,15 @@ export const ContactForm = () => {
 
   const onSubmitForm = event => {
     event.preventDefault();
-    onAddContact({
-      name,
-      number,
-    });
+
+    if (name && number) {
+      onAddContact({
+        name,
+        number,
+      });
+    } else {
+      alert('The number field and name are empty, fill them in!');
+    }
 
     reset(event);
   };
@@ -46,36 +55,41 @@ export const ContactForm = () => {
   };
 
   return (
-    <form onSubmit={onSubmitForm}>
-      <label className={style.label}>
-        Name
-        <input
-          className={style.input}
-          value={name}
-          type="text"
-          name="name"
-          required
-          onChange={onChangeInput}
-        />
-      </label>
-
-      <label className={style.label}>
-        Number
-        <input
-          className={style.input}
-          value={number}
-          type="tel"
-          name="number"
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          required
-          onChange={onChangeInput}
-        />
-      </label>
-
-      <button className={style.button} type="submit">
+    <Box
+      component="form"
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      alignItems="center"
+      sx={{
+        '& > :not(style)': { m: 1 },
+      }}
+      autoComplete="off"
+      onSubmit={onSubmitForm}
+    >
+      <Typography variant="h1">Phonebook</Typography>
+      <TextField
+        sx={{ width: '45ch' }}
+        type="text"
+        name="name"
+        onChange={onChangeInput}
+        id="filled-basic"
+        label="Name"
+        variant="filled"
+      />
+      <TextField
+        sx={{ width: '45ch' }}
+        value={number}
+        type="tel"
+        name="number"
+        id="filled-basic"
+        label="Number"
+        variant="filled"
+        onChange={onChangeInput}
+      />
+      <Button disabled={!name || !number} type="submit">
         Add Contact
-      </button>
-    </form>
+      </Button>
+    </Box>
   );
 };
