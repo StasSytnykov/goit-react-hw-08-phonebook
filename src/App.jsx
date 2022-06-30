@@ -1,11 +1,12 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import { useDispatch } from 'react-redux';
-import { ContactsView } from 'views/ContactsView';
-import { AppBarView } from 'views/AppBarView';
-import { RegisterView } from 'views/RegisterView';
-import { LoginView } from 'views/LoginView';
 import { fetchCurrentUser } from 'redux/auth/authOperations';
+
+const AppBarView = lazy(() => import('./views/AppBarView'));
+const ContactsView = lazy(() => import('./views/ContactsView'));
+const RegisterView = lazy(() => import('./views/RegisterView'));
+const LoginView = lazy(() => import('./views/LoginView'));
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -15,13 +16,15 @@ export const App = () => {
   }, [dispatch]);
 
   return (
-    <Routes>
-      <Route path="*" element={<Navigate to="/register" />} />
-      <Route path="/" element={<AppBarView />}>
-        <Route path="/contacts" element={<ContactsView />} />
-        <Route path="/register" element={<RegisterView restricted />} />
-        <Route path="/login" element={<LoginView restricted />} />
-      </Route>
-    </Routes>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Routes>
+        <Route path="*" element={<Navigate to="/register" />} />
+        <Route path="/" element={<AppBarView />}>
+          <Route path="/contacts" element={<ContactsView />} />
+          <Route path="/register" element={<RegisterView restricted />} />
+          <Route path="/login" element={<LoginView restricted />} />
+        </Route>
+      </Routes>
+    </Suspense>
   );
 };

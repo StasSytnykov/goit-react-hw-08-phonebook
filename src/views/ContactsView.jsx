@@ -5,7 +5,7 @@ import { Filter } from 'components/Filter';
 import { ContactsList } from 'components/ContactsList';
 import { getLoggedIn } from 'redux/auth/authSelectors';
 
-export const ContactsView = () => {
+const ContactsView = () => {
   const isLoggedIn = useSelector(getLoggedIn);
 
   return isLoggedIn ? (
@@ -18,3 +18,5 @@ export const ContactsView = () => {
     <Navigate to={'/login'} />
   );
 };
+
+export default ContactsView;

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { getLoggedIn } from 'redux/auth/authSelectors';
 import { AuthForm } from 'components/AuthForm/AuthForm';
 
-export const LoginView = ({ restricted = false }) => {
+const LoginView = ({ restricted = false }) => {
   const isLoggedIn = useSelector(getLoggedIn);
   const shouldRedirect = isLoggedIn && restricted;
   return shouldRedirect ? (
@@ -17,3 +17,5 @@ export const LoginView = ({ restricted = false }) => {
 LoginView.propTypes = {
   restricted: PropTypes.bool.isRequired,
 };
+
+export default LoginView;

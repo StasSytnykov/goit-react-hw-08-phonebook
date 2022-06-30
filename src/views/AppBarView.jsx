@@ -21,7 +21,7 @@ const activeLinkStyle = {
   marginRight: '30px',
 };
 
-export const AppBarView = () => {
+const AppBarView = () => {
   const isLoggedIn = useSelector(getLoggedIn);
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -69,3 +69,5 @@ export const AppBarView = () => {
     </Box>
   );
 };
+
+export default AppBarView;
