@@ -19,13 +19,9 @@ export const App = () => {
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
         <Route path="*" element={<Navigate to="/register" />} />
-        <Route
-          path="/goit-react-hw-08-phonebook/"
-          element={<Navigate to="/register" />}
-        />
         <Route path="/" element={<AppBarView />}>
+          <Route path="register" element={<RegisterView restricted />} />
           <Route path="/contacts" element={<ContactsView />} />
-          <Route path="/register" element={<RegisterView restricted />} />
           <Route path="/login" element={<LoginView restricted />} />
         </Route>
       </Routes>
