@@ -61,7 +61,6 @@ export const ContactForm = () => {
         component="form"
         display="flex"
         justifyContent="center"
-        alignItems="center"
         sx={{
           '& > :not(style)': { m: 1 },
         }}

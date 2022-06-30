@@ -1,23 +1,25 @@
 import PropTypes from 'prop-types';
+import { ListItemText, ListItem } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 import { useDeleteContactMutation } from 'redux/contacts/contactsSlice';
-import style from './ContactsListItem.module.css';
+// import style from './ContactsListItem.module.css';
 
 export const ContactListItem = ({ name, number, id }) => {
   const [deleteContact, { isLoading }] = useDeleteContactMutation();
   return (
-    <li className={style.list}>
-      <p>
-        {name}: {number}
-      </p>
-      <button
-        className={style.button}
+    <ListItem>
+      <ListItemText primary={`${name}: ${number}`} />
+      <IconButton
         disabled={isLoading}
         onClick={() => deleteContact(id)}
-        type="button"
+        edge="end"
+        aria-label="delete"
       >
-        Delete
-      </button>
-    </li>
+        <DeleteIcon />
+      </IconButton>
+    </ListItem>
   );
 };
 
