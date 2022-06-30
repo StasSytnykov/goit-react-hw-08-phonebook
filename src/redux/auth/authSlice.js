@@ -12,13 +12,11 @@ export const userSlice = createSlice({
   initialState,
   extraReducers: {
     [register.fulfilled](state, { payload }) {
-      console.log(payload);
       state.user = payload.user;
       state.token = payload.token;
       state.isLoggedIn = true;
     },
     [login.fulfilled](state, { payload }) {
-      console.log(payload);
       state.user = payload.user;
       state.token = payload.token;
       state.isLoggedIn = true;

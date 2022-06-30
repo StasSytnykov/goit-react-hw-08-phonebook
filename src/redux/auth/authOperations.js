@@ -22,7 +22,7 @@ export const register = createAsyncThunk('auth/register', async credentials => {
     token.set(data.token);
     return data;
   } catch (error) {
-    console.log(error);
+    alert('Register failed try again.');
   }
 });
 
@@ -36,7 +36,7 @@ export const login = createAsyncThunk('auth/login', async credentials => {
     token.set(data.token);
     return data;
   } catch (error) {
-    console.log(error);
+    alert('Login failed try again.');
   }
 });
 
@@ -50,7 +50,7 @@ export const logout = createAsyncThunk('auth/logout', async credentials => {
     token.unset();
     return data;
   } catch (error) {
-    console.log(error);
+    alert('Logout failed try again.');
   }
 });
 
@@ -69,10 +69,9 @@ export const fetchCurrentUser = createAsyncThunk(
       const { data } = await axios.get(
         'https://connections-api.herokuapp.com/users/current/'
       );
-      console.log(data);
       return data;
     } catch (error) {
-      console.log(error);
+      alert('Refresh failed try again.');
     }
   }
 );

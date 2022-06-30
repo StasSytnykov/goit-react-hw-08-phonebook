@@ -24,49 +24,51 @@ const activeLinkStyle = {
 const AppBarView = () => {
   const isLoggedIn = useSelector(getLoggedIn);
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          ></IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Contacts book
-          </Typography>
-          {!isLoggedIn ? (
-            <>
-              <Button>
-                <NavLink
-                  style={({ isActive }) =>
-                    isActive ? activeLinkStyle : linkStyle
-                  }
-                  to="/register"
-                >
-                  Register
-                </NavLink>
-              </Button>
-              <Button>
-                <NavLink
-                  style={({ isActive }) =>
-                    isActive ? activeLinkStyle : linkStyle
-                  }
-                  to="/login"
-                >
-                  Login
-                </NavLink>
-              </Button>
-            </>
-          ) : (
-            <UserMenu />
-          )}
-        </Toolbar>
-      </AppBar>
+    <>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+            ></IconButton>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              Contacts book
+            </Typography>
+            {!isLoggedIn ? (
+              <>
+                <Button>
+                  <NavLink
+                    style={({ isActive }) =>
+                      isActive ? activeLinkStyle : linkStyle
+                    }
+                    to="/register"
+                  >
+                    Register
+                  </NavLink>
+                </Button>
+                <Button>
+                  <NavLink
+                    style={({ isActive }) =>
+                      isActive ? activeLinkStyle : linkStyle
+                    }
+                    to="/login"
+                  >
+                    Login
+                  </NavLink>
+                </Button>
+              </>
+            ) : (
+              <UserMenu />
+            )}
+          </Toolbar>
+        </AppBar>
+      </Box>
       <Outlet />
-    </Box>
+    </>
   );
 };
 
