@@ -7,6 +7,8 @@ const HomeView = lazy(() => import('./views/HomeView'));
 const ContactsView = lazy(() => import('./views/ContactsView'));
 const RegisterView = lazy(() => import('./views/RegisterView'));
 const LoginView = lazy(() => import('./views/LoginView'));
+const PublicRoute = lazy(() => import('./Routes/PublicRoute'));
+const PrivateRoute = lazy(() => import('./Routes/PrivateRoute'));
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -20,9 +22,15 @@ export const App = () => {
       <Routes>
         <Route path="*" element={<Navigate to="register" />} />
         <Route path="/" element={<HomeView />}>
-          <Route path="register" element={<RegisterView restricted />} />
-          <Route path="contacts" element={<ContactsView />} />
-          <Route path="login" element={<LoginView restricted />} />
+          <Route element={<PublicRoute restricted redirectTo="contacts" />}>
+            <Route path="register" element={<RegisterView />} />
+          </Route>
+          <Route element={<PublicRoute restricted redirectTo="contacts" />}>
+            <Route path="login" element={<LoginView />} />
+          </Route>
+          <Route element={<PrivateRoute redirectTo="login" />}>
+            <Route path="contacts" element={<ContactsView />} />
+          </Route>
         </Route>
       </Routes>
     </Suspense>
