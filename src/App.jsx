@@ -20,7 +20,7 @@ export const App = () => {
       <Routes>
         <Route path="*" element={<Navigate to="/register" />} />
         <Route
-          path="/goit-react-hw-08-phonebook"
+          path="/goit-react-hw-08-phonebook/"
           element={<Navigate to="/register" />}
         />
         <Route path="/" element={<AppBarView />}>
