@@ -4,7 +4,6 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import { useDeleteContactMutation } from 'redux/contacts/contactsSlice';
-// import style from './ContactsListItem.module.css';
 
 export const ContactListItem = ({ name, number, id }) => {
   const [deleteContact, { isLoading }] = useDeleteContactMutation();

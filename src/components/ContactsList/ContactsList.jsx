@@ -1,16 +1,19 @@
 import { Grid, List, Box } from '@mui/material';
-// import Table from '@mui/material/Table';
-// import TableBody from '@mui/material/TableBody';
-// import TableCell from '@mui/material/TableCell';
-// import TableHead from '@mui/material/TableHead';
-// import TableRow from '@mui/material/TableRow';
-// import TableContainer from '@mui/material/TableContainer';
-// import Container from '@mui/material/Container';
-// import Paper from '@mui/material/Paper';
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
 import { ContactListItem } from './ContactListItem';
 import { useFilter } from 'hooks/filterHook';
 import { useGetContactsQuery } from 'redux/contacts/contactsSlice';
 import { useMemo } from 'react';
+
+const StyledPaper = styled(Paper)(({ theme }) => ({
+  backgroundColor:
+    theme.palette.mode === 'dark' ? '#1A2027' : 'rgba(0, 0, 0, 0.06)',
+  ...theme.typography.body2,
+  padding: theme.spacing(2),
+  minWidth: 400,
+  color: theme.palette.text.primary,
+}));
 
 export const ContactsList = () => {
   const { filter } = useFilter();
@@ -30,30 +33,24 @@ export const ContactsList = () => {
       justifyContent="center"
       alignItems="center"
       textAlign="center"
-      // maxWidth={1000}
       sx={{ flexGrow: 1 }}
     >
-      {/* <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Dessert (100g serving)</TableCell>
-              <TableCell align="right">Calories</TableCell>
-              <TableCell align="right">Fat&nbsp;(g)</TableCell>
-              <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-              <TableCell align="right">Protein&nbsp;(g)</TableCell>
-            </TableRow>
-          </TableHead>
-        </Table>
-      </TableContainer> */}
-      <Grid item xs={12} md={6}>
-        <List>
-          {filteredContacts &&
-            filteredContacts.map(({ name, number, id }) => (
-              <ContactListItem key={id} name={name} number={number} id={id} />
-            ))}
-        </List>
-      </Grid>
+      <StyledPaper
+        sx={{
+          my: 1,
+          mx: 'auto',
+          p: 2,
+        }}
+      >
+        <Grid item xs={12} md={6}>
+          <List>
+            {filteredContacts &&
+              filteredContacts.map(({ name, number, id }) => (
+                <ContactListItem key={id} name={name} number={number} id={id} />
+              ))}
+          </List>
+        </Grid>
+      </StyledPaper>
     </Box>
   );
 };

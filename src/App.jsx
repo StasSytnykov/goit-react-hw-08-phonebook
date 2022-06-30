@@ -21,6 +21,7 @@ export const App = () => {
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
         <Route path="*" element={<Navigate to="register" />} />
+        <Route path="/" element={<Navigate to="register" />} />
         <Route path="/" element={<HomeView />}>
           <Route element={<PublicRoute restricted redirectTo="contacts" />}>
             <Route path="register" element={<RegisterView />} />
